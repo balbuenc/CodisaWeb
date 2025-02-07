@@ -6,7 +6,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 // ----------------------------------------------------------------------
 
-const PORT = 8080;
+const PORT = 3000;
 
 export default defineConfig({
   plugins: [
