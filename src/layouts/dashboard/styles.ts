@@ -67,7 +67,7 @@ export function useNavColorVars(
       case 'apparent':
         return {
           layout: {
-            '--layout-nav-bg': palette.grey[900],
+            '--layout-nav-bg': palette.primary.dark,
             '--layout-nav-horizontal-bg': varAlpha(palette.grey['900Channel'], 0.96),
             '--layout-nav-border-color': 'transparent',
             '--layout-nav-text-primary-color': palette.common.white,
@@ -82,10 +82,10 @@ export function useNavColorVars(
             // caption
             '--nav-item-caption-color': palette.grey[600],
             // subheader
-            '--nav-subheader-color': palette.grey[600],
+            '--nav-subheader-color': palette.grey[200],
             '--nav-subheader-hover-color': palette.common.white,
             // item
-            '--nav-item-color': palette.grey[500],
+            '--nav-item-color': palette.grey[300],
             '--nav-item-root-active-color': palette.primary.light,
             '--nav-item-root-open-color': palette.common.white,
             // bullet
@@ -106,6 +106,7 @@ export function useNavColorVars(
     palette.common.white,
     palette.grey,
     palette.primary.light,
+    palette.primary.dark,
     palette.text.disabled,
     palette.text.primary,
     palette.text.secondary,

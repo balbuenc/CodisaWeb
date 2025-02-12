@@ -6,7 +6,7 @@ import { UserCreateView } from 'src/sections/user/view';
 
 // ----------------------------------------------------------------------
 
-const metadata = { title: `Registro PTC | CYO - ${CONFIG.appName}` };
+const metadata = { title: `Creación de tomas | Auditoría - ${CONFIG.appName}` };
 
 export default function Page() {
   return (

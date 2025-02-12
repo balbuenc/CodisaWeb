@@ -64,8 +64,6 @@ export function DashboardLayout({ sx, children, header, data }: DashboardLayoutP
   const isNavHorizontal = settings.navLayout === 'horizontal';
   const isNavVertical = isNavMini || settings.navLayout === 'vertical';
 
-  console.log('DATOS FILTRADOS=====>', filteredNavData);
-
   return (
     <LayoutSection
       /** **************************************

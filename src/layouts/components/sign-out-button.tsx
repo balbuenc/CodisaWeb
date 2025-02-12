@@ -17,13 +17,14 @@ import { signOut as jwtSignOut } from 'src/auth/context/jwt/action';
 import { signOut as amplifySignOut } from 'src/auth/context/amplify/action';
 import { signOut as supabaseSignOut } from 'src/auth/context/supabase/action';
 import { signOut as firebaseSignOut } from 'src/auth/context/firebase/action';
-
+import { logoutFromKeycloak } from 'src/auth/context/jwt/keycloak';
 // ----------------------------------------------------------------------
 
 const signOut =
   (CONFIG.auth.method === 'supabase' && supabaseSignOut) ||
   (CONFIG.auth.method === 'firebase' && firebaseSignOut) ||
   (CONFIG.auth.method === 'amplify' && amplifySignOut) ||
+  (CONFIG.auth.method === 'keycloak' && logoutFromKeycloak) ||
   jwtSignOut;
 
 type Props = ButtonProps & {
@@ -40,14 +41,17 @@ export function SignOutButton({ onClose, ...other }: Props) {
 
   const handleLogout = useCallback(async () => {
     try {
-      await signOut();
-      await checkUserSession?.();
-
-      onClose?.();
-      router.refresh();
+      if (CONFIG.auth.method === 'keycloak') {
+        await logoutFromKeycloak();
+      } else {
+        await signOut();
+        await checkUserSession?.();
+        onClose?.();
+        router.refresh();
+      }
     } catch (error) {
       console.error(error);
-      toast.error('Unable to logout!');
+      toast.error('Error al cerrar sesión');
     }
   }, [checkUserSession, onClose, router]);
 
@@ -69,10 +73,16 @@ export function SignOutButton({ onClose, ...other }: Props) {
       variant="soft"
       size="large"
       color="error"
-      onClick={CONFIG.auth.method === 'auth0' ? handleLogoutAuth0 : handleLogout}
+      onClick={
+        CONFIG.auth.method === 'keycloak'
+          ? logoutFromKeycloak // 🔹 Usa directamente la función de Keycloak
+          : CONFIG.auth.method === 'auth0'
+            ? handleLogoutAuth0
+            : handleLogout
+      }
       {...other}
     >
-      Logout
+      Cerrar sesión
     </Button>
   );
 }

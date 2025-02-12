@@ -44,58 +44,27 @@ const ICONS = {
 
 export const navData = [
   {
-    subheader: 'Maehara',
+    subheader: 'Linker Codisa',
     items: [
       {
-        title: 'Clasificadora CYO',
-        path: paths.dashboard.cyo.root,
-        icon: ICONS.chicken,
-        roles: [ROLES.CYO_READ],
+        title: 'Modulo Auditoria',
+        path: paths.dashboard.auditoria.root,
+        icon: ICONS.label,
+        roles: [ROLES.MODULO_AUDITORIA],
         children: [
           {
-            title: 'PTC',
-            path: paths.dashboard.cyo.ptc.root,
-            //   path: '#/dashboard/menu_level/menu_level_1a/menu_level_2a',
-
-            icon: ICONS.chicken,
-            roles: [ROLES.CYO_PTC_READ],
+            title: 'Modulo inventario',
+            path: paths.dashboard.auditoria.moduloInventario.root,
+            icon: ICONS.folder,
+            roles: [ROLES.MODULO_INVENTARIO],
             children: [
               {
-                title: 'Liberados recogidas',
-                path: paths.dashboard.cyo.ptc.registroLiberado,
-                // path: '#/dashboard/menu_level/menu_level_1a/menu_level_2a',
-
-                roles: [ROLES.CYO_PTC_RECOGIDA_LIBERADOS_READ],
-              },
-              {
-                title: 'Retenido recogidas',
-                path: '#/dashboard/menu_level/menu_level_1a/menu_level_2a',
-                roles: [ROLES.AVIARIOS_READ],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        title: 'Informes',
-        path: paths.dashboard.informes.root,
-        icon: ICONS.blog,
-        roles: [ROLES.INFORMES_READ],
-        children: [
-          {
-            title: 'Producción primaria',
-            path: paths.dashboard.informes.produccionPrimaria.root,
-            roles: [ROLES.INFORMES_PPR_READ],
-            children: [
-              {
-                title: 'Informe de ventas',
-                path: paths.dashboard.informes.produccionPrimaria.informeVentas,
-                roles: [ROLES.INFORMES_VENTA_READ],
-              },
-              {
-                title: 'Informe de aviarios',
-                path: paths.dashboard.informes.produccionPrimaria.informeVentas2,
-                roles: [ROLES.INFORMES_VENTA_READ],
+                title: 'Crear toma de inventario',
+                path: paths.dashboard.auditoria.moduloInventario.crearToma,
+                roles: [
+                  ROLES.GENERACION_TOMA_INVENTARIO_VIEW,
+                  ROLES.GENERACION_TOMA_INVENTARIO_CREATE,
+                ],
               },
             ],
           },
@@ -114,7 +83,6 @@ export const filterNavDataByRoles = (roles: string[], initialNavData: any[]): an
   };
 
   const expandedRoles = getExpandedRoles(roles);
-
   const filterItems = (items: any[]): any[] =>
     items
       .map((item) => ({

@@ -10,7 +10,7 @@ export type ConfigValue = {
   serverUrl: string;
   assetsDir: string;
   auth: {
-    method: 'jwt' | 'amplify' | 'firebase' | 'supabase' | 'auth0';
+    method: 'jwt' | 'amplify' | 'firebase' | 'supabase' | 'auth0'|'keycloak';
     skip: boolean;
     redirectPath: string;
   };
@@ -32,7 +32,7 @@ export type ConfigValue = {
 // ----------------------------------------------------------------------
 
 export const CONFIG: ConfigValue = {
-  appName: 'Minimal UI',
+  appName: 'Linker Codisa',
   appVersion: packageJson.version,
   serverUrl: import.meta.env.VITE_SERVER_URL ?? '',
   assetsDir: import.meta.env.VITE_ASSETS_DIR ?? '',
@@ -41,10 +41,11 @@ export const CONFIG: ConfigValue = {
    * @method jwt | amplify | firebase | supabase | auth0
    */
   auth: {
-    method: 'jwt',
+    method: 'keycloak', // ✅ Ahora usa Keycloak
     skip: false,
     redirectPath: paths.dashboard.root,
   },
+  
   /**
    * Mapbox
    */

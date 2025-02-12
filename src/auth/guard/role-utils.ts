@@ -7,8 +7,9 @@ export const getRolesFromToken = (): string[] => {
       }
   
       const decoded: any = JSON.parse(atob(token.split('.')[1])); // Decodificar el token
-      return decoded.realm_access?.roles || [];
-    } catch (error) {
+   //   return decoded.realm_access?.roles || [];
+   return decoded.resource_access?.["codisa-system"]?.roles || [];
+  } catch (error) {
       console.error('Error al obtener roles del token:', error);
       return [];
     }

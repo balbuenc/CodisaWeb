@@ -41,14 +41,14 @@ export function NavVertical({
     <>
       {slots?.topArea ?? (
         <Box sx={{ pl: 3.5, pt: 2.5, pb: 1 }}>
-          <Logo />
+          <Logo disableLink />
         </Box>
       )}
 
       <Scrollbar fillContent>
         <NavSectionVertical data={data} sx={{ px: 2, flex: '1 1 auto' }} {...other} />
 
-        {slots?.bottomArea ?? <NavUpgrade />}
+        {/* slots?.bottomArea ?? <NavUpgrade /> */}
       </Scrollbar>
     </>
   );

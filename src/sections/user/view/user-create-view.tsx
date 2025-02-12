@@ -12,10 +12,10 @@ export function UserCreateView() {
   return (
     <DashboardContent>
       <CustomBreadcrumbs
-        heading="Registro de PTC"
+        heading="Registro de toma"
         links={[
-          { name: 'Dashboard', href: paths.dashboard.cyo.root },
-          { name: 'Nuevo registro', href: paths.dashboard.user.root },
+          { name: 'Dashboard', href: paths.dashboard.auditoria.root },
+          { name: 'Nuevo registro', href: paths.dashboard.auditoria.moduloInventario.crearToma },
           { name: 'Registro liberado' },
         ]}
         sx={{ mb: { xs: 3, md: 5 } }}

@@ -179,15 +179,20 @@ export const dashboardRoutes = [
       },
 
       {
-        path: 'cyo',
+        path: 'auditoria',
         children: [
           {
-            path: 'ptc',
+            path: 'moduloInventario',
             children: [
               {
-                path: 'registroPtc',
+                path: 'crearToma',
                 element: (
-                  <RoleGuard requiredRoles={[ROLES.INFORMES_VENTA_READ]}>
+                  <RoleGuard
+                    requiredRoles={[
+                      ROLES.GENERACION_TOMA_INVENTARIO_VIEW,
+                      ROLES.GENERACION_TOMA_INVENTARIO_CREATE,
+                    ]}
+                  >
                     <UserCreatePage />
                   </RoleGuard>
                 ), // La página correspondiente al informe de ventas

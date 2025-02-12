@@ -55,8 +55,16 @@ export const Logo = forwardRef<HTMLDivElement, LogoProps>(
     );
     *
     */
-
     const singleLogo = (
+      <Box
+        component="img"
+        src="/assets/images/about/logosolo.jpg" // Ruta a tu imagen
+        alt="Nuevo Logo"
+        width="100%"
+        height="100%"
+      />
+    );
+    const singleLogo2 = (
       <svg
         width="100%"
         height="100%"
@@ -118,7 +126,7 @@ export const Logo = forwardRef<HTMLDivElement, LogoProps>(
       </svg>
     );
 
-    const fullLogo = (
+    const fullLogo2 = (
       <svg
         width="100%"
         height="100%"
@@ -186,6 +194,15 @@ export const Logo = forwardRef<HTMLDivElement, LogoProps>(
       </svg>
     );
 
+    const fullLogo = (
+      <Box
+        component="img"
+        src="/assets/images/about/logosolo.jpg" // Usa la misma o una versión más grande si tienes
+        alt="Nuevo Logo Completo"
+        width="100%"
+        height="100%"
+      />
+    );
     const baseSize = {
       width: width ?? 40,
       height: height ?? 40,

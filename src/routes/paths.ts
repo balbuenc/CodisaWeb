@@ -153,33 +153,19 @@ export const paths = {
       },
     },
     
-    cyo: {
-      root: `${ROOTS.DASHBOARD}/cyo/ptc`,
-      unidades: `${ROOTS.DASHBOARD}/cyo/unidades`,
-      registro: `${ROOTS.DASHBOARD}/cyo/registro`,
-      ptc: {
-        root: `${ROOTS.DASHBOARD}/cyo`,
-        registroLiberado: `${ROOTS.DASHBOARD}/cyo/ptc/registroPtc`,
-        edit: `${ROOTS.DASHBOARD}/cyo/${MOCK_ID}/edit`,
+    auditoria: {
+      root: `${ROOTS.DASHBOARD}/auditoria/moduloInventario`,
+      moduloInventario: {
+        root: `${ROOTS.DASHBOARD}/auditoria`,
+        crearToma: `${ROOTS.DASHBOARD}/auditoria/moduloInventario/crearToma`,
       },
       mis: {
-        details: `${ROOTS.DASHBOARD}/cyo/${MOCK_ID}`,
-        edit: `${ROOTS.DASHBOARD}/cyo/${MOCK_ID}/edit`,
+        details: `${ROOTS.DASHBOARD}/auditoria/${MOCK_ID}`,
+        edit: `${ROOTS.DASHBOARD}/auditoria/${MOCK_ID}/edit`,
       },
     },
 
-
-
-    informes: {
-      root: `${ROOTS.DASHBOARD}/informes`,
-      produccionPrimaria: {
-        root: `${ROOTS.DASHBOARD}/informes/produccionPrimaria`,
-        informeVentas: `${ROOTS.DASHBOARD}/informes/produccionPrimaria/informeVentas`,
-        informeVentas2: `${ROOTS.DASHBOARD}/informes/produccionPrimaria/informeVentas2`,
-      },
-    },
-    
-
+ 
     post: {
       root: `${ROOTS.DASHBOARD}/post`,
       new: `${ROOTS.DASHBOARD}/post/new`,

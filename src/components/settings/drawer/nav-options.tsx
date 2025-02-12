@@ -78,7 +78,7 @@ export function NavOptions({ options, value, onClickOption, hideNavColor, hideNa
   );
 
   return (
-    <Block title="Nav" tooltip="Dashboard only" sx={{ gap: 2.5 }}>
+    <Block title="Nav" tooltip="Solo el Dashboard" sx={{ gap: 2.5 }}>
       {!hideNavLayout && renderLayout}
       {!hideNavColor && renderColor}
     </Block>

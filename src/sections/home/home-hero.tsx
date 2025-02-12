@@ -72,10 +72,7 @@ export function HomeHero({ sx, ...other }: BoxProps) {
           [theme.breakpoints.up(lgKey)]: { fontSize: 72, lineHeight: '90px' },
         }}
       >
-        <Box component="span" sx={{ width: 1, opacity: 0.24 }}>
-          Boost your building
-        </Box>
-        process with
+        Linker
         <Box
           component={m.span}
           animate={{ backgroundPosition: '200% center' }}
@@ -93,7 +90,7 @@ export function HomeHero({ sx, ...other }: BoxProps) {
             ml: { xs: 0.75, md: 1, xl: 1.5 },
           }}
         >
-          Minimal
+          CODISA
         </Box>
       </Box>
     </AnimatedDiv>
@@ -151,7 +148,7 @@ export function HomeHero({ sx, ...other }: BoxProps) {
             startIcon={<Iconify width={24} icon="iconoir:flash" />}
           >
             <span>
-              Live preview
+              Ingresar
               <Box
                 component="small"
                 sx={{
@@ -166,35 +163,7 @@ export function HomeHero({ sx, ...other }: BoxProps) {
               </Box>
             </span>
           </Button>
-
-          <Link
-            color="inherit"
-            variant="body2"
-            target="_blank"
-            rel="noopener"
-            href={paths.freeUI}
-            underline="always"
-            sx={{ gap: 0.5, alignItems: 'center', display: 'inline-flex' }}
-          >
-            Get free version
-            <Iconify width={16} icon="eva:external-link-fill" />
-          </Link>
         </Stack>
-      </AnimatedDiv>
-
-      <AnimatedDiv>
-        <Button
-          color="inherit"
-          size="large"
-          variant="outlined"
-          target="_blank"
-          rel="noopener"
-          href={paths.figmaUrl}
-          startIcon={<Iconify width={24} icon="solar:figma-outline" />}
-          sx={{ borderColor: 'text.primary' }}
-        >
-          Figma preview
-        </Button>
       </AnimatedDiv>
     </Box>
   );
@@ -203,12 +172,12 @@ export function HomeHero({ sx, ...other }: BoxProps) {
     <Stack spacing={3} sx={{ textAlign: 'center' }}>
       <AnimatedDiv>
         <Typography variant="overline" sx={{ opacity: 0.4 }}>
-          Available For
+          Sistema desarrollado en
         </Typography>
       </AnimatedDiv>
 
       <Stack spacing={2.5} direction="row">
-        {['js', 'ts', 'nextjs', 'vite', 'figma'].map((platform) => (
+        {['js', 'ts', 'react', 'vite', 'auth0'].map((platform) => (
           <AnimatedDiv key={platform}>
             {platform === 'nextjs' ? (
               <SvgColor
@@ -278,9 +247,7 @@ export function HomeHero({ sx, ...other }: BoxProps) {
         >
           <Stack spacing={3} sx={{ textAlign: 'center' }}>
             <m.div style={{ y: y1 }}>{renderHeading}</m.div>
-            <m.div style={{ y: y2 }}>{renderText}</m.div>
           </Stack>
-          <m.div style={{ y: y3 }}>{renderRatings}</m.div>
           <m.div style={{ y: y4 }}>{renderButtons}</m.div>
           <m.div style={{ y: y5 }}>{renderIcons}</m.div>
         </Container>

@@ -10,8 +10,9 @@ export const ROLES = {
     INFORMES_AVIARIOS_READ: 'informes_aviarios_read',
     REGISTRO_READ: 'reg_create',
 
-    CYO_READ:'cyo_read',
-    CYO_PTC_READ:'cyo_read',
-    CYO_PTC_RECOGIDA_LIBERADOS_READ:'cyo_ptc_recogida_liberados_read',
+    MODULO_AUDITORIA:'modulo-auditoria',
+    MODULO_INVENTARIO:'modulo-inventario',
+    GENERACION_TOMA_INVENTARIO_VIEW:'generacion-tomas-inventario-view',
+    GENERACION_TOMA_INVENTARIO_CREATE:'generacion-tomas-inventario-create',
    };
   

@@ -1,7 +1,7 @@
 import type { IUserItem } from 'src/types/user';
 
 import { z as zod } from 'zod';
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller } from 'react-hook-form';
 import { isValidPhoneNumber } from 'react-phone-number-input/input';
@@ -9,21 +9,15 @@ import { isValidPhoneNumber } from 'react-phone-number-input/input';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Switch from '@mui/material/Switch';
 import Grid from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography';
 import LoadingButton from '@mui/lab/LoadingButton';
-import FormControlLabel from '@mui/material/FormControlLabel';
-
 import { paths } from 'src/routes/paths';
 import { useRouter } from 'src/routes/hooks';
 
-import { fData } from 'src/utils/format-number';
-
-import { Label } from 'src/components/label';
 import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
+import { getRolesFromToken } from '@guard/role-utils'; // Ya lo tienes
+import { ROLES } from '@guard/roles.constants';
 
 // ----------------------------------------------------------------------
 
@@ -58,7 +52,14 @@ type Props = {
 };
 
 export function RegistroPtc({ currentUser }: Props) {
+  const [userRoles, setUserRoles] = useState<string[]>([]);
+
   const router = useRouter();
+  useEffect(() => {
+    const roles = getRolesFromToken();
+    setUserRoles(roles);
+    console.log('Roles del usuario:', roles); // Verifica en la consola si los roles se obtienen correctamente
+  }, []);
 
   const defaultValues = useMemo(
     () => ({
@@ -137,11 +138,13 @@ export function RegistroPtc({ currentUser }: Props) {
               <Field.Text name="role" label="Role" />
             </Box>
 
-            <Stack alignItems="flex-end" sx={{ mt: 3 }}>
-              <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
-                {!currentUser ? 'Registrar' : 'Save changes'}
-              </LoadingButton>
-            </Stack>
+            {userRoles.includes(ROLES.GENERACION_TOMA_INVENTARIO_CREATE) && (
+              <Stack alignItems="flex-end" sx={{ mt: 3 }}>
+                <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
+                  {!currentUser ? 'Registrar' : 'Save changes'}
+                </LoadingButton>
+              </Stack>
+            )}
           </Card>
         </Grid>
       </Grid>
