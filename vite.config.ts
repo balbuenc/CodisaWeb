@@ -36,6 +36,13 @@ export default defineConfig({
       },
     ],
   },
-  server: { port: PORT, host: true },
-  preview: { port: PORT, host: true },
+  server: { 
+    port: PORT, 
+    host: true,
+    allowedHosts: ["linkercodisa.codisa.com.py"] // Agrega el host permitido aquí
+  },
+  preview: { port: PORT, host: true ,
+    allowedHosts: ["linkercodisa.codisa.com.py"] // Agrega el host permitido aquí
+
+  },
 });
