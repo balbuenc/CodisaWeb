@@ -120,73 +120,33 @@ export const checkSessionWithRefreshToken = async () => {
 };
 
 
+export const checkKeycloakSession = async (): Promise<boolean> => {
+  const accessToken = localStorage.getItem('accessToken');
 
-
-/* 
-export const checkSessionValidity = async () => {
-  const realm = 'master';
-  const clientId = 'codisa-system';
-  const clientSecret = 'dIqawCwNKrvQNWw5638NkKThI0dVbCKc';
-  const url = link+`/realms/${realm}/protocol/openid-connect/token/introspect`;
-
-  const refreshToken = localStorage.getItem('accessToken');
-
-  if (!refreshToken) {
-    console.warn('No hay refresh token disponible, cerrando sesión localmente.');
-    handleLocalLogout();
-    return;
+  if (!accessToken) {
+    console.warn('No hay token de acceso disponible.');
+    return true; // Usuario no autenticado
   }
-
-  const params = new URLSearchParams();
-  params.append('client_id', clientId);
-  params.append('client_secret', clientSecret);
-  params.append('token', refreshToken);
 
   try {
-    await axios.post(url, params, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': '*',
-       },
-    });
-    console.log('Sesión cerrada en Keycloak correctamente.');
+    const response = await axios.post(
+      'http://localhost:4000/api/keycloak/check-session',
+      { token: accessToken }, // Enviar token en el body
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    console.log('Respuesta del backend:', response.data);
+
+    return response.data.active === true; // Retornar si el token es activo
   } catch (error) {
-    console.error('Error al cerrar sesión en Keycloak:', error);
-  } finally {
-   // handleLocalLogout();
+    console.error('Error al verificar la sesión:', error);
+    return false; // Si hay error, consideramos que la sesión ha expirado
   }
 };
-
-export const checkSessionValidity = async (): Promise<boolean> => {
-  const token = localStorage.getItem('accessToken');
-  if (!token) {
-    console.warn('No hay token en localStorage.');
-    return false;
-  }
-
-  const url = `http://192.168.0.198:8089/realms/master/protocol/openid-connect/token/introspect`;
-
-  const params = new URLSearchParams();
-  params.append('client_id', 'codisa-system');
-  params.append('client_secret', 'dIqawCwNKrvQNWw5638NkKThI0dVbCKc');
-  params.append('token', token);
-
-  try {
-    const response = await axios.post(url, params, {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      withCredentials: true, // 🔥 Importante para permitir cookies/sesiones
-    });
-
-    console.log('Respuesta del introspect:', response.data);
-    return response.data.active;
-  } catch (error) {
-    console.error('Error al verificar el token:', error);
-    return false;
-  }
-};
-*/
 
 
 const handleLocalLogout = () => {

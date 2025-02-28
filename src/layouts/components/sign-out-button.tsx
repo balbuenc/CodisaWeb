@@ -68,21 +68,28 @@ export function SignOutButton({ onClose, ...other }: Props) {
   }, [onClose, router, signOutAuth0]);
 
   return (
-    <Button
-      fullWidth
-      variant="soft"
-      size="large"
-      color="error"
-      onClick={
-        CONFIG.auth.method === 'keycloak'
-          ? logoutFromKeycloak // 🔹 Usa directamente la función de Keycloak
-          : CONFIG.auth.method === 'auth0'
-            ? handleLogoutAuth0
-            : handleLogout
-      }
-      {...other}
-    >
-      Cerrar sesión
-    </Button>
+    <>
+      <Button
+        fullWidth
+        variant="soft"
+        size="large"
+        color="error"
+        onClick={
+          CONFIG.auth.method === 'keycloak'
+            ? logoutFromKeycloak
+            : CONFIG.auth.method === 'auth0'
+              ? handleLogoutAuth0
+              : handleLogout
+        }
+        {...other}
+      >
+        Cerrar sesión
+      </Button>
+
+      {/* Botón para cambiar la contraseña */}
+      <Button fullWidth variant="soft" size="large" color="primary" sx={{ mt: 1 }}>
+        Cambiar contraseña
+      </Button>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'src/routes/hooks';  
-import { checkSessionWithRefreshToken } from './context/jwt/keycloak';
+import { checkSessionWithRefreshToken, checkKeycloakSession } from './context/jwt/keycloak';
 
 export function SessionChecker() {
   const router = useRouter();
@@ -11,7 +11,8 @@ export function SessionChecker() {
       if (isChecking) return;
       setIsChecking(true);
 
-      const isValid = await checkSessionWithRefreshToken();
+      // const isValid = await checkSessionWithRefreshToken();
+      const isValid = await checkKeycloakSession();
 
       if (!isValid) {
         console.warn('El usuario ha sido desconectado desde Keycloak.');
@@ -22,8 +23,8 @@ export function SessionChecker() {
         sessionStorage.removeItem('jwt_access_token');
 
         // Redirigir al login con un mensaje
-        window.location.href = "/auth/jwt/sign-in?error=session-expired";
-    }
+        window.location.href = '/auth/jwt/sign-in?error=session-expired';
+      }
 
       setIsChecking(false);
     }, 10000);
