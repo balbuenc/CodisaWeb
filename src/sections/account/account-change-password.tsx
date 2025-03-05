@@ -21,18 +21,12 @@ export type ChangePassWordSchemaType = zod.infer<typeof ChangePassWordSchema>;
 
 export const ChangePassWordSchema = zod
   .object({
-    oldPassword: zod.string().min(1, { message: 'La contraseña antigua es requerida!' }),
-
     newPassword: zod
       .string()
       .min(6, { message: 'La contraseña debe tener al menos 6 caracteres!' }),
     confirmNewPassword: zod
       .string()
       .min(6, { message: 'La contraseña debe tener al menos 6 caracteres!' }),
-  })
-  .refine((data) => data.oldPassword !== data.newPassword, {
-    message: 'La nueva contraseña debe ser diferente a la contraseña antigua',
-    path: ['newPassword'],
   })
   .refine((data) => data.newPassword === data.confirmNewPassword, {
     message: 'Las contraseñas no coinciden!',
