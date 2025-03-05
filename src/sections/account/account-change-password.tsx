@@ -64,7 +64,7 @@ export function AccountChangePassword() {
         toast.error(response.message || 'Error al actualizar la contraseña'); // ❌ Mostrar error
       }
     } catch (error) {
-      console.error('❌ Error al cambiar la contraseña:', error);
+      console.error('❌ Error al cambiar la contraseña del usuario:', error);
       toast.error('Error inesperado. Inténtalo de nuevo.');
     }
   });
