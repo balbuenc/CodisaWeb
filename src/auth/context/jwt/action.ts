@@ -23,19 +23,10 @@ export type SignUpParams = {
  *************************************** */
 export const signInWithPassword = async ({ email, password }: SignInParams): Promise<void> => {
   try {
-//    const params = { email, password };
-   const accessToken = await loginToKeycloak(email, password);
-
-
-    //  const res = await axios.post(endpoints.auth.signIn, params);
-    //   console.log("Token =======>",res.data)
-    // const { accessToken } = res.data;
- 
- 
+    const accessToken = await loginToKeycloak(email, password);
     if (!accessToken) {
       throw new Error('Access token not found in response');
     }
-
     setSession(accessToken);
   } catch (error) {
     console.error('Error during sign in:', error);

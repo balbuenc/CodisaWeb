@@ -1,23 +1,35 @@
-# Usar la imagen oficial de Node.js como base
-FROM node:18.16.0
- 
-# Establecer el directorio de trabajo en el contenedor
+# 1️⃣ Usa la imagen oficial de Node.js como base para construir
+FROM node:18.16.0 AS builder
+
+# 2️⃣ Establecer el directorio de trabajo en el contenedor
 WORKDIR /app
 
-# Copiar el package.json y package-lock.json (o yarn.lock) al contenedor
+# 3️⃣ Copiar los archivos necesarios para instalar dependencias
 COPY package*.json ./
 
-# Instalar las dependencias
+# 4️⃣ Instalar las dependencias
 RUN npm install
 
-# Copiar todo el contenido del proyecto al contenedor
+# 5️⃣ Copiar todo el código fuente
 COPY . .
 
-# Construir el proyecto para producción
+# 6️⃣ Construir la aplicación para producción
 RUN npm run build
 
-# Exponer el puerto en el que Vite se ejecuta
+# 7️⃣ Usa una imagen base más ligera para servir la app
+FROM node:18.16.0
+
+# 8️⃣ Establecer el directorio de trabajo en el nuevo contenedor
+WORKDIR /app
+
+# 9️⃣ Instalar un servidor ligero para servir la app
+RUN npm install -g serve
+
+# 🔟 Copiar los archivos construidos desde el contenedor anterior
+COPY --from=builder /app/dist /app/dist
+
+# 1️⃣1️⃣ Exponer el puerto que usará el servidor (3000)
 EXPOSE 3000
 
-# Ejecutar la aplicación en el contenedor
-CMD ["npm", "run", "dev"]
+# 1️⃣2️⃣ Servir la app en modo producción
+CMD ["serve", "-s", "dist", "-l", "3000"]

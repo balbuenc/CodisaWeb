@@ -10,8 +10,12 @@ import { AuthGuard } from 'src/auth/guard';
 
 import { RoleGuard } from 'src/auth/guard/role-guard';
 import { ROLES } from '@guard/roles.constants';
+import { AccountChangePassword } from 'src/sections/account/account-change-password';
+import {} from 'src/pages/auth/auth0/update-password';
 
 // ----------------------------------------------------------------------
+
+const UpdatePassView = lazy(() => import('src/pages/auth/auth0/update-password'));
 
 // Overview
 const IndexPage = lazy(() => import('src/pages/dashboard'));
@@ -205,23 +209,16 @@ export const dashboardRoutes = [
                   </RoleGuard>
                 ), // Detalle de un informe específico
               },
-              {
-                path: ':id/edit',
-                element: (
-                  <RoleGuard requiredRoles={['asd']}>
-                    <ProductListPage />
-                  </RoleGuard>
-                ), // Edición de un informe específico
-              },
-              {
-                path: 'new',
-                element: (
-                  <RoleGuard requiredRoles={['asd']}>
-                    <ProductListPage />
-                  </RoleGuard>
-                ), // Crear un nuevo informe
-              },
             ],
+          },
+        ],
+      },
+      {
+        path: 'seguridad',
+        children: [
+          {
+            path: 'cambioPass',
+            element: <UpdatePassView />, // Edición de un informe específico
           },
         ],
       },

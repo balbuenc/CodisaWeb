@@ -4,13 +4,14 @@ import packageJson from '../package.json';
 
 // ----------------------------------------------------------------------
 
+
 export type ConfigValue = {
   appName: string;
   appVersion: string;
   serverUrl: string;
   assetsDir: string;
   auth: {
-    method: 'jwt' | 'amplify' | 'firebase' | 'supabase' | 'auth0'|'keycloak';
+    method: 'jwt' | 'amplify' | 'firebase' | 'supabase' | 'auth0' | 'keycloak';
     skip: boolean;
     redirectPath: string;
   };
@@ -30,12 +31,18 @@ export type ConfigValue = {
 };
 
 // ----------------------------------------------------------------------
+const isProduction = import.meta.env.MODE === 'production';
 
 export const CONFIG: ConfigValue = {
   appName: 'Linker Codisa',
   appVersion: packageJson.version,
-  serverUrl: import.meta.env.VITE_SERVER_URL ?? '',
+
+  serverUrl: `${import.meta.env.VITE_SERVER_URL ?? 'http://'}${
+    isProduction ? import.meta.env.VITE_IP_API_PROD : import.meta.env.VITE_IP_API
+  }`,
+
   assetsDir: import.meta.env.VITE_ASSETS_DIR ?? '',
+
   /**
    * Auth
    * @method jwt | amplify | firebase | supabase | auth0
@@ -45,7 +52,7 @@ export const CONFIG: ConfigValue = {
     skip: false,
     redirectPath: paths.dashboard.root,
   },
-  
+
   /**
    * Mapbox
    */

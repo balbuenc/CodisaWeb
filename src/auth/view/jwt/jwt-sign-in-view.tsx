@@ -50,8 +50,8 @@ export function JwtSignInView() {
   const password = useBoolean();
 
   const defaultValues = {
-    email: 'demo@minimals.cc',
-    password: '@demo1',
+    email: '',
+    password: '',
   };
 
   const methods = useForm<SignInSchemaType>({
@@ -71,8 +71,7 @@ export function JwtSignInView() {
 
       router.refresh();
     } catch (error) {
-      console.error(error);
-      setErrorMsg(typeof error === 'string' ? error : error.message);
+      setErrorMsg(typeof error === 'string' ? error : error);
     }
   });
 

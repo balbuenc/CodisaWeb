@@ -13,6 +13,7 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import { toast } from 'src/components/snackbar';
 import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
+import { Typography } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -20,19 +21,21 @@ export type ChangePassWordSchemaType = zod.infer<typeof ChangePassWordSchema>;
 
 export const ChangePassWordSchema = zod
   .object({
-    oldPassword: zod
+    oldPassword: zod.string().min(1, { message: 'La contraseña antigua es requerida!' }),
+
+    newPassword: zod
       .string()
-      .min(1, { message: 'Password is required!' })
-      .min(6, { message: 'Password must be at least 6 characters!' }),
-    newPassword: zod.string().min(1, { message: 'New password is required!' }),
-    confirmNewPassword: zod.string().min(1, { message: 'Confirm password is required!' }),
+      .min(6, { message: 'La contraseña debe tener al menos 6 caracteres!' }),
+    confirmNewPassword: zod
+      .string()
+      .min(6, { message: 'La contraseña debe tener al menos 6 caracteres!' }),
   })
   .refine((data) => data.oldPassword !== data.newPassword, {
-    message: 'New password must be different than old password',
+    message: 'La nueva contraseña debe ser diferente a la contraseña antigua',
     path: ['newPassword'],
   })
   .refine((data) => data.newPassword === data.confirmNewPassword, {
-    message: 'Passwords do not match!',
+    message: 'Las contraseñas no coinciden!',
     path: ['confirmNewPassword'],
   });
 
@@ -41,7 +44,7 @@ export const ChangePassWordSchema = zod
 export function AccountChangePassword() {
   const password = useBoolean();
 
-  const defaultValues = { oldPassword: '', newPassword: '', confirmNewPassword: '' };
+  const defaultValues = { newPassword: '', confirmNewPassword: '' };
 
   const methods = useForm<ChangePassWordSchemaType>({
     mode: 'all',
@@ -70,23 +73,8 @@ export function AccountChangePassword() {
     <Form methods={methods} onSubmit={onSubmit}>
       <Card sx={{ p: 3, gap: 3, display: 'flex', flexDirection: 'column' }}>
         <Field.Text
-          name="oldPassword"
-          type={password.value ? 'text' : 'password'}
-          label="Old password"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton onClick={password.onToggle} edge="end">
-                  <Iconify icon={password.value ? 'solar:eye-bold' : 'solar:eye-closed-bold'} />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-
-        <Field.Text
           name="newPassword"
-          label="New password"
+          label="Nueva contraseña"
           type={password.value ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -97,18 +85,12 @@ export function AccountChangePassword() {
               </InputAdornment>
             ),
           }}
-          helperText={
-            <Stack component="span" direction="row" alignItems="center">
-              <Iconify icon="eva:info-fill" width={16} sx={{ mr: 0.5 }} /> Password must be minimum
-              6+
-            </Stack>
-          }
         />
 
         <Field.Text
           name="confirmNewPassword"
           type={password.value ? 'text' : 'password'}
-          label="Confirm new password"
+          label="Confirmar Nueva contraseña"
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -120,8 +102,14 @@ export function AccountChangePassword() {
           }}
         />
 
-        <LoadingButton type="submit" variant="contained" loading={isSubmitting} sx={{ ml: 'auto' }}>
-          Save changes
+        <LoadingButton
+          type="submit"
+          variant="contained"
+          loading={isSubmitting}
+          disabled={!methods.formState.isValid}
+          sx={{ ml: 'auto' }}
+        >
+          Guardar cambios
         </LoadingButton>
       </Card>
     </Form>

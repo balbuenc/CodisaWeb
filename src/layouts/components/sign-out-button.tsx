@@ -18,6 +18,7 @@ import { signOut as amplifySignOut } from 'src/auth/context/amplify/action';
 import { signOut as supabaseSignOut } from 'src/auth/context/supabase/action';
 import { signOut as firebaseSignOut } from 'src/auth/context/firebase/action';
 import { logoutFromKeycloak } from 'src/auth/context/jwt/keycloak';
+import { useNavigate } from 'react-router';
 // ----------------------------------------------------------------------
 
 const signOut =
@@ -33,6 +34,8 @@ type Props = ButtonProps & {
 };
 
 export function SignOutButton({ onClose, ...other }: Props) {
+  const navigate = useNavigate(); // Hook para navegación
+
   const router = useRouter();
 
   const { checkUserSession } = useAuthContext();
@@ -87,7 +90,14 @@ export function SignOutButton({ onClose, ...other }: Props) {
       </Button>
 
       {/* Botón para cambiar la contraseña */}
-      <Button fullWidth variant="soft" size="large" color="primary" sx={{ mt: 1 }}>
+      <Button
+        fullWidth
+        variant="soft"
+        size="large"
+        color="primary"
+        sx={{ mt: 1 }}
+        onClick={() => navigate('/dashboard/seguridad/cambioPass')} // Navegar a la ruta
+      >
         Cambiar contraseña
       </Button>
     </>
