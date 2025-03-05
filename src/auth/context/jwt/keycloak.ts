@@ -56,6 +56,42 @@ export const logoutFromKeycloak = async () => {
     handleLocalLogout();
   }
 };
+ 
+export const changePasswordFromKeycloak = async (nuevaContraseña: string) => {
+  try {
+    const token = localStorage.getItem('accessToken'); // Obtener el token
+    if (!token) {
+      console.warn('No se encontró el token en localStorage');
+      return { success: false, message: 'No se encontró el token en localStorage' };
+    }
+
+    // Decodificar el token para obtener el userId
+    const idUsuario = JSON.parse(atob(token.split('.')[1]))?.sub; // Extraer el "sub" que es el userId
+
+    if (!idUsuario) {
+      console.warn('No se pudo obtener el ID de usuario del token.');
+      return { success: false, message: 'No se pudo obtener el ID de usuario.' };
+    }
+
+    // Llamar a la API para cambiar la contraseña
+    const response = await axios.post(
+      `${CONFIG.serverUrl}:4000/api/keycloak/change-password`,
+      { userId: idUsuario, newPassword: nuevaContraseña }, // Enviamos en el body
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // Enviar el token en el header
+        },
+      }
+    );
+
+    return response.data; // Retorna el mensaje de éxito
+  } catch (error: any) {
+    console.error('❌ Error al cambiar la contraseña:', error.response?.data || error.message);
+    return { success: false, message: 'Error al cambiar la contraseña' };
+  }
+};
+
 
 export const loginToKeycloak = async (username: string, password: string) => {
   try {

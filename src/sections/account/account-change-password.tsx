@@ -14,7 +14,7 @@ import { toast } from 'src/components/snackbar';
 import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
 import { Typography } from '@mui/material';
-
+import { changePasswordFromKeycloak } from 'src/auth/context/jwt/keycloak';
 // ----------------------------------------------------------------------
 
 export type ChangePassWordSchemaType = zod.infer<typeof ChangePassWordSchema>;
@@ -54,12 +54,18 @@ export function AccountChangePassword() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
-      toast.success('Update success!');
-      console.info('DATA', data);
+      const response = await changePasswordFromKeycloak(data.newPassword); // 🔹 Espera la respuesta
+
+      if (response.success) {
+        toast.success(response.message); // ✅ Mensaje de éxito
+        reset();
+        console.info('✅ Contraseña cambiada con éxito', data);
+      } else {
+        toast.error(response.message || 'Error al actualizar la contraseña'); // ❌ Mostrar error
+      }
     } catch (error) {
-      console.error(error);
+      console.error('❌ Error al cambiar la contraseña:', error);
+      toast.error('Error inesperado. Inténtalo de nuevo.');
     }
   });
 
