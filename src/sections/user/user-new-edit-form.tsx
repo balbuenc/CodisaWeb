@@ -18,8 +18,7 @@ import { toast } from 'src/components/snackbar';
 import { Form, Field, schemaHelper } from 'src/components/hook-form';
 import { getRolesFromToken } from '@guard/role-utils'; // Ya lo tienes
 import { ROLES } from '@guard/roles.constants';
-
-// ----------------------------------------------------------------------
+import { useModuloActual } from 'src/hooks/useModuloActual'; // <--- importar el hook
 
 export type NewUserSchemaType = zod.infer<typeof NewUserSchema>;
 
@@ -50,15 +49,25 @@ export const NewUserSchema = zod.object({
 type Props = {
   currentUser?: IUserItem;
 };
-
 export function RegistroPtc({ currentUser }: Props) {
-  const [userRoles, setUserRoles] = useState<string[]>([]);
+  const [userRoles, setUserRoles] = useState<string[]>([]); // ✅ única y dentro del componente
+  const moduloActual = useModuloActual(); // ✅ también dentro del componente
+
+  const tienePermisoCrear = useMemo(() => {
+    if (moduloActual === 'TIC') {
+      return userRoles.includes(ROLES.GENERACION_SOLICITUD_TIC_NUEVO_EQUIPO_CREATE);
+    }
+    if (moduloActual === 'COMERCIAL') {
+      return userRoles.includes(ROLES.GENERACION_SOLICITUD_COMERCIAL_NUEVO_EQUIPO_CREATE);
+    }
+    return false;
+  }, [moduloActual, userRoles]);
 
   const router = useRouter();
+
   useEffect(() => {
     const roles = getRolesFromToken();
     setUserRoles(roles);
-    console.log('Roles del usuario:', roles); // Verifica en la consola si los roles se obtienen correctamente
   }, []);
 
   const defaultValues = useMemo(
@@ -138,7 +147,7 @@ export function RegistroPtc({ currentUser }: Props) {
               <Field.Text name="role" label="Role" />
             </Box>
 
-            {userRoles.includes(ROLES.GENERACION_TOMA_INVENTARIO_CREATE) && (
+            {tienePermisoCrear && (
               <Stack alignItems="flex-end" sx={{ mt: 3 }}>
                 <LoadingButton type="submit" variant="contained" loading={isSubmitting}>
                   {!currentUser ? 'Registrar' : 'Save changes'}

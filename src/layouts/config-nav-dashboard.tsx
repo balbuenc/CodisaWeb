@@ -12,6 +12,8 @@ const icon = (name: string) => (
 
 const ICONS = {
   job: icon('ic-job'),
+  settings: icon('ic-settings'),
+  tic: icon('ic-tic'),
   blog: icon('ic-blog'),
   chat: icon('ic-chat'),
   mail: icon('ic-mail'),
@@ -47,24 +49,78 @@ export const navData = [
     subheader: 'Linker Codisa',
     items: [
       {
-        title: 'Modulo Auditoria',
-        path: paths.dashboard.auditoria.root,
-        icon: ICONS.label,
-        roles: [ROLES.MODULO_AUDITORIA],
+        title: 'Módulo de TIC',
+        path: paths.dashboard.tic.root,
+        icon: ICONS.tic,
+        roles: [ROLES.MODULO_TIC],
         children: [
           {
-            title: 'Modulo inventario',
-            path: paths.dashboard.auditoria.moduloInventario.root,
+            title: 'Solicitudes',
+            path: paths.dashboard.tic.moduloSolicitudes.root,
             icon: ICONS.folder,
-            roles: [ROLES.MODULO_INVENTARIO],
+            roles: [ROLES.MODULO_SOLICITUD_TIC],
             children: [
               {
-                title: 'Crear toma de inventario',
-                path: paths.dashboard.auditoria.moduloInventario.crearToma,
+                title: 'Solicitud de Equipo',
+                path: paths.dashboard.tic.moduloSolicitudes.crearSolicitudNuevaMaquina,
                 roles: [
-                  ROLES.GENERACION_TOMA_INVENTARIO_VIEW,
-                  ROLES.GENERACION_TOMA_INVENTARIO_CREATE,
+                  ROLES.GENERACION_SOLICITUD_TIC_NUEVO_EQUIPO_VIEW,
+                  ROLES.GENERACION_SOLICITUD_TIC_NUEVO_EQUIPO_CREATE,
                 ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: 'Módulo de comercial',
+        path: paths.dashboard.comercial.root,
+        icon: ICONS.label,
+        roles: [ROLES.MODULO_COMERCIAL],
+        children: [
+          {
+            title: 'Solicitudes',
+            path: paths.dashboard.comercial.moduloSolicitudes.root,
+            icon: ICONS.folder,
+            roles: [ROLES.MODULO_SOLICITUD_COMERCIAL],
+            children: [
+              {
+                title: 'Solicitud de Equipo',
+                path: paths.dashboard.comercial.moduloSolicitudes.crearSolicitudNuevaMaquina,
+                roles: [
+                  ROLES.GENERACION_SOLICITUD_COMERCIAL_NUEVO_EQUIPO_VIEW,
+                  ROLES.GENERACION_SOLICITUD_COMERCIAL_NUEVO_EQUIPO_CREATE,
+                ],
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        title: 'Módulo de seguridad',
+        path: paths.dashboard.seguridad.root,
+        icon: ICONS.settings,
+        roles: [ROLES.MODULO_SEGURIDAD],
+        children: [
+          {
+            title: 'Parametrizaciones',
+            path: paths.dashboard.seguridad.moduloNotificaciones.root,
+            icon: ICONS.mail,
+            roles: [ROLES.MODULO_NOTIFICACION],
+            children: [
+              {
+                title: 'Ajustes de notificaciones',
+                path: paths.dashboard.seguridad.moduloNotificaciones.ajusteEnvioNotificaciones,
+                roles: [
+                  ROLES.PARAMETRIZAR_NOTIFICACION_VIEW,
+                  ROLES.PARAMETRIZAR_NOTIFICACION_CREATE,
+                ],
+              },
+              {
+                title: 'Autorizaciones por firma',
+                path: paths.dashboard.seguridad.moduloNotificaciones.ajusteAutorizacionesFirmas,
+                roles: [ROLES.PARAMETRIZAR_FIRMA_VIEW, ROLES.PARAMETRIZAR_FIRMA_CREATE],
               },
             ],
           },
@@ -75,32 +131,40 @@ export const navData = [
 ];
 
 export const filterNavDataByRoles = (roles: string[], initialNavData: any[]): any[] => {
-  // Obtener los roles expandidos (ajustado para no incluir secundarios específicos si se desea)
   const getExpandedRoles = (userRoles: string[]): string[] => {
     const expandedRoles = new Set<string>(userRoles);
-
     return Array.from(expandedRoles);
   };
 
   const expandedRoles = getExpandedRoles(roles);
+
   const filterItems = (items: any[]): any[] =>
     items
-      .map((item) => ({
-        ...item,
-        children: item.children ? filterItems(item.children) : undefined,
-      }))
-      .filter((item) =>
-        item.roles
+      .map((item) => {
+        const children = item.children ? filterItems(item.children) : undefined;
+        const hasRole = item.roles
           ? item.roles.some((role: string) => expandedRoles.includes(role))
-          : item.children && item.children.length > 0
-      );
+          : false;
 
-  const newNav = initialNavData.map((section) => ({
-    ...section,
-    items: filterItems(section.items),
-  }));
+        if (hasRole || (children && children.length > 0)) {
+          return {
+            ...item,
+            children,
+          };
+        }
 
-  console.log('Filtered Nav Data:', newNav);
+        return null;
+      })
+      .filter(Boolean);
+
+  const newNav = initialNavData
+    .map((section) => ({
+      ...section,
+      items: filterItems(section.items),
+    }))
+    .filter((section) => section.items.length > 0); // Oculta secciones vacías
+
   return newNav;
 };
+
 

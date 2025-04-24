@@ -11,6 +11,7 @@ import { Block, BlockOption } from './styles';
 
 import type { SettingsState } from '../types';
 
+
 // ----------------------------------------------------------------------
 
 type Props = {
@@ -52,7 +53,10 @@ export function NavOptions({ options, value, onClickOption, hideNavColor, hideNa
             key={option}
             option={option}
             selected={value.layout === option}
-            onClick={() => onClickOption.layout(option)}
+            onClick={() => {
+              console.log('Layout seleccionado:', option);
+              onClickOption.layout(option);
+            }}
           />
         ))}
       </Box>
@@ -70,7 +74,10 @@ export function NavOptions({ options, value, onClickOption, hideNavColor, hideNa
             key={option}
             option={option}
             selected={value.color === option}
-            onClick={() => onClickOption.color(option)}
+            onClick={() => {
+              console.log('Color seleccionado:', option);
+              onClickOption.color(option);
+            }}
           />
         ))}
       </Box>

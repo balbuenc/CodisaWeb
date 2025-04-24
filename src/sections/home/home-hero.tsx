@@ -59,40 +59,16 @@ export function HomeHero({ sx, ...other }: BoxProps) {
   const renderHeading = (
     <AnimatedDiv>
       <Box
-        component="h1"
-        display="flex"
-        flexWrap="wrap"
-        justifyContent="center"
+        component="img"
+        src="/assets/images/about/LINKER_BLUE.svg"
+        alt="Linker Codisa Logo"
         sx={{
-          ...theme.typography.h2,
-          my: 0,
+          width: { xs: 180, sm: 220, md: 260 },
           mx: 'auto',
-          maxWidth: 680,
-          fontFamily: theme.typography.fontSecondaryFamily,
-          [theme.breakpoints.up(lgKey)]: { fontSize: 72, lineHeight: '90px' },
+          my: { xs: 2, md: 4 },
+          display: 'block',
         }}
-      >
-        Linker
-        <Box
-          component={m.span}
-          animate={{ backgroundPosition: '200% center' }}
-          transition={{
-            duration: 20,
-            ease: 'linear',
-            repeat: Infinity,
-            repeatType: 'reverse',
-          }}
-          sx={{
-            ...textGradient(
-              `300deg, ${theme.vars.palette.primary.main} 0%, ${theme.vars.palette.warning.main} 25%, ${theme.vars.palette.primary.main} 50%, ${theme.vars.palette.warning.main} 75%, ${theme.vars.palette.primary.main} 100%`
-            ),
-            backgroundSize: '400%',
-            ml: { xs: 0.75, md: 1, xl: 1.5 },
-          }}
-        >
-          CODISA
-        </Box>
-      </Box>
+      />
     </AnimatedDiv>
   );
 
@@ -145,23 +121,8 @@ export function HomeHero({ sx, ...other }: BoxProps) {
             color="inherit"
             size="large"
             variant="contained"
-            startIcon={<Iconify width={24} icon="iconoir:flash" />}
           >
-            <span>
-              Ingresar
-              <Box
-                component="small"
-                sx={{
-                  mt: '-3px',
-                  opacity: 0.64,
-                  display: 'flex',
-                  fontSize: theme.typography.pxToRem(10),
-                  fontWeight: theme.typography.fontWeightMedium,
-                }}
-              >
-                v{CONFIG.appVersion}
-              </Box>
-            </span>
+            <span>Comencemos</span>
           </Button>
         </Stack>
       </AnimatedDiv>

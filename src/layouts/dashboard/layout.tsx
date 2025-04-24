@@ -63,7 +63,6 @@ export function DashboardLayout({ sx, children, header, data }: DashboardLayoutP
   const isNavMini = settings.navLayout === 'mini';
   const isNavHorizontal = settings.navLayout === 'horizontal';
   const isNavVertical = isNavMini || settings.navLayout === 'vertical';
-
   return (
     <LayoutSection
       /** **************************************
@@ -141,26 +140,21 @@ export function DashboardLayout({ sx, children, header, data }: DashboardLayoutP
                   />
                 )}
                 {/* -- Workspace popover -- */}
-                <WorkspacesPopover
-                  data={_workspaces}
-                  sx={{ color: 'var(--layout-nav-text-primary-color)' }}
-                />
               </>
             ),
             rightArea: (
               <Box display="flex" alignItems="center" gap={{ xs: 0, sm: 0.75 }}>
                 {/* -- Searchbar -- */}
                 <Searchbar data={navData} />
-                {/* -- Language popover -- */}
-                <LanguagePopover data={allLangs} />
-                {/* -- Notifications popover -- */}
-                <NotificationsDrawer data={_notifications} />
-                {/* -- Contacts popover -- */}
-                <ContactsPopover data={_contacts} />
+
+                {/* <LanguagePopover data={allLangs} /> -- Notifications popover --  <NotificationsDrawer data={_notifications} /> */}
+
+                {/* -- Contacts popover --  <ContactsPopover data={_contacts} /> */}
+
                 {/* -- Settings button -- */}
                 <SettingsButton />
                 {/* -- Account drawer -- */}
-                <AccountDrawer data={_account} />
+                <AccountDrawer />
               </Box>
             ),
           }}

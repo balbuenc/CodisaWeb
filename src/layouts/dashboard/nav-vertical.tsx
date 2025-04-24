@@ -35,8 +35,9 @@ export function NavVertical({
   ...other
 }: NavVerticalProps) {
   const theme = useTheme();
+  /*
   console.log({ navFinalData: data });
-
+*/
   const renderNavVertical = (
     <>
       {slots?.topArea ?? (

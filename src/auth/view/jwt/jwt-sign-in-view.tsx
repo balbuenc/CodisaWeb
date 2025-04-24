@@ -77,13 +77,13 @@ export function JwtSignInView() {
 
   const renderForm = (
     <Box gap={3} display="flex" flexDirection="column">
-      <Field.Text name="email" label="Email o usuario" InputLabelProps={{ shrink: true }} />
+      <Field.Text name="email" label="Correo o usuario" InputLabelProps={{ shrink: true }} />
 
       <Box gap={1.5} display="flex" flexDirection="column">
-           <Field.Text
+        <Field.Text
           name="password"
           label="Contraseña"
-        //  placeholder="6+ characters"
+          //  placeholder="6+ characters"
           type={password.value ? 'text' : 'password'}
           InputLabelProps={{ shrink: true }}
           InputProps={{
@@ -107,20 +107,14 @@ export function JwtSignInView() {
         loading={isSubmitting}
         loadingIndicator="Iniciando..."
       >
-        Iniciar
+        Iniciar sesión
       </LoadingButton>
     </Box>
   );
 
   return (
     <>
-    
-      <FormHead
-        title="Inicio de Sesion"
-       
-        sx={{ textAlign: { xs: 'center', md: 'left' } }}
-      />
- 
+      <FormHead title="Inicio de sesión" sx={{ textAlign: { xs: 'center', md: 'left' } }} />
 
       {!!errorMsg && (
         <Alert severity="error" sx={{ mb: 3 }}>

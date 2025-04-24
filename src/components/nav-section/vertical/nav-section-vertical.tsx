@@ -54,9 +54,9 @@ function Group({ items, render, subheader, slotProps, enabledRootRedirect }: Nav
   const handleToggle = useCallback(() => {
     setOpen((prev) => !prev);
   }, []);
-
+  /*
   console.log({ items });
-
+*/
   const renderContent = (
     <NavUl sx={{ gap: 'var(--nav-item-gap)' }}>
       {items.map((list) => (

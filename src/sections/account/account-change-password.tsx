@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import Card from '@mui/material/Card';
-import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import LoadingButton from '@mui/lab/LoadingButton';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -13,7 +12,6 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import { toast } from 'src/components/snackbar';
 import { Iconify } from 'src/components/iconify';
 import { Form, Field } from 'src/components/hook-form';
-import { Typography } from '@mui/material';
 import { changePasswordFromKeycloak } from 'src/auth/context/jwt/keycloak';
 // ----------------------------------------------------------------------
 
@@ -61,7 +59,7 @@ export function AccountChangePassword() {
         reset();
         console.info('✅ Contraseña cambiada con éxito', data);
       } else {
-        toast.error(response.message || 'Error al actualizar la contraseña'); // ❌ Mostrar error
+        toast.error(response.message || 'Error al actualizar la contraseña');
       }
     } catch (error) {
       console.error('❌ Error al cambiar la contraseña del usuario:', error);

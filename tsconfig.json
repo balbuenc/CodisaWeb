@@ -5,7 +5,7 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "strict": true,
     "noEmit": true,
-    "allowJs": true,
+    "allowJs": false,
     "module": "ESNext",
     "jsx": "react-jsx",
     "skipLibCheck": true,
@@ -22,10 +22,8 @@
     "forceConsistentCasingInFileNames": true,
 
     "paths": {
-    "@guard/*": ["src/auth/guard/*"] 
+      "@guard/*": ["src/auth/guard/*"]
     }
-
-
   },
   "include": ["src"],
   "exclude": ["node_modules"],

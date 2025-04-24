@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 142.45 144.3">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: url(#Degradado_sin_nombre_94);
+      }
+    </style>
+    <radialGradient id="Degradado_sin_nombre_94" data-name="Degradado sin nombre 94" cx="70.54" cy="72.06" fx="70.54" fy="72.06" r="20.18" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".67" stop-color="#8b86b8"/>
+      <stop offset="1" stop-color="#595984"/>
+    </radialGradient>
+  </defs>
+  <g id="Capa_1-2" data-name="Capa 1">
+    <g>
+      <path class="cls-1" d="M70.51,97.88l1.52-1.24c51.6-1.23,58.26-74.33,7.72-84.74L79.71,0c52.11,7.17,79.29,64.99,51.89,110.21-10.52,17.37-29.62,30.03-49.73,33.03-1.87.28-11.37,1.92-11.37-.33v-45.04Z"/>
+      <path class="cls-1" d="M71.43,0v46.41l-.9.95c-28.9.75-47.88,26.5-40.97,54.67,3.71,15.14,18.1,28.59,33.59,30.32v11.94c-26.38-3.42-49.6-21.53-58.67-46.62C-12.61,50.4,21.2.82,71.43,0Z"/>
+      <ellipse class="cls-2" cx="70.54" cy="72.06" rx="20.19" ry="20.17"/>
+    </g>
+  </g>
+</svg>

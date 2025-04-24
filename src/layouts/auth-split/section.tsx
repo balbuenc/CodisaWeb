@@ -33,8 +33,8 @@ export function Section({
   layoutQuery,
   methods,
   title = 'Manage the job',
-  imgUrl = `${CONFIG.assetsDir}/assets/illustrations/illustration-dashboard.webp`,
-  subtitle = 'Más efectividad con flujos de trabajo optimizados.',
+  imgUrl = `${CONFIG.assetsDir}/assets/images/about/logoBlanco.svg`,
+  subtitle = 'Transformando requerimientos en sistemas inteligentes.',
   ...other
 }: SectionProps) {
   const theme = useTheme();
@@ -43,7 +43,7 @@ export function Section({
     <Box
       sx={{
         ...bgGradient({
-          color: `0deg, ${varAlpha(theme.vars.palette.background.defaultChannel, 0.92)}, ${varAlpha(theme.vars.palette.background.defaultChannel, 0.92)}`,
+          color: `0deg, rgba(0, 46, 138, 0.92), rgba(0, 2, 138, 0.92)`, // azul CODISA translúcido
           imgUrl: `${CONFIG.assetsDir}/assets/background/background-3-blur.webp`,
         }),
         px: 3,
@@ -65,61 +65,53 @@ export function Section({
       {...other}
     >
       <div>
-        <Typography variant="h3" sx={{ textAlign: 'center' }}>
-          {title}
-        </Typography>
+        <img
+          src="/assets/images/about/LINKER_WHT.svg"
+          alt="Logo"
+          style={{
+            display: 'block',
+            margin: '0 auto',
+            width: '120px',
+            height: 'auto',
+            opacity: 0,
+            animation: 'fadeIn 1s ease-in-out forwards',
+          }}
+        />
 
         {subtitle && (
-          <Typography sx={{ color: 'text.secondary', textAlign: 'center', mt: 2 }}>
+          <Typography
+            sx={{
+              color: '#FFFFFF',
+              textAlign: 'center',
+              mt: 2,
+              display: 'block',
+              margin: '5 auto',
+              width: 'auto',
+              height: 'auto',
+              animation: 'fadeIn 1s ease-in-out forwards',
+            }}
+          >
             {subtitle}
           </Typography>
         )}
       </div>
 
+      <style>
+        {`
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+  `}
+      </style>
+
       <Box
         component="img"
         alt="Dashboard illustration"
         src={imgUrl}
-        sx={{ width: 1, aspectRatio: '4/3', objectFit: 'cover' }}
+        sx={{ width: 1, aspectRatio: '2/2', objectFit: 'cover' }}
       />
-
-      {!!methods?.length && method && (
-        <Box component="ul" gap={2} display="flex">
-          {methods.map((option) => {
-            const selected = method === option.label.toLowerCase();
-
-            return (
-              <Box
-                key={option.label}
-                component="li"
-                sx={{
-                  ...(!selected && {
-                    cursor: 'not-allowed',
-                    filter: 'grayscale(1)',
-                  }),
-                }}
-              >
-                <Tooltip title={option.label} placement="top">
-                  <Link
-                    component={RouterLink}
-                    href={option.path}
-                    sx={{
-                      ...(!selected && { pointerEvents: 'none' }),
-                    }}
-                  >
-                    <Box
-                      component="img"
-                      alt={option.label}
-                      src={option.icon}
-                      sx={{ width: 32, height: 32 }}
-                    />
-                  </Link>
-                </Tooltip>
-              </Box>
-            );
-          })}
-        </Box>
-      )}
     </Box>
   );
 }

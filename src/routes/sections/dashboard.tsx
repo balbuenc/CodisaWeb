@@ -44,6 +44,11 @@ const UserCardsPage = lazy(() => import('src/pages/dashboard/user/cards'));
 const UserListPage = lazy(() => import('src/pages/dashboard/user/list'));
 const UserAccountPage = lazy(() => import('src/pages/dashboard/user/account'));
 const UserCreatePage = lazy(() => import('src/pages/dashboard/user/new'));
+
+
+const Notificaciones = lazy(() => import('src/pages/dashboard/notificaciones/edit'));
+const AutorizacionesFirmas = lazy(() => import('src/pages/dashboard/autorizacionesFirmas/edit'));
+
 const UserEditPage = lazy(() => import('src/pages/dashboard/user/edit'));
 // Blog
 const BlogPostsPage = lazy(() => import('src/pages/dashboard/post/list'));
@@ -183,18 +188,18 @@ export const dashboardRoutes = [
       },
 
       {
-        path: 'auditoria',
+        path: 'tic',
         children: [
           {
-            path: 'moduloInventario',
+            path: 'moduloSolicitudes',
             children: [
               {
-                path: 'crearToma',
+                path: 'nuevaSolicitudMaquina',
                 element: (
                   <RoleGuard
                     requiredRoles={[
-                      ROLES.GENERACION_TOMA_INVENTARIO_VIEW,
-                      ROLES.GENERACION_TOMA_INVENTARIO_CREATE,
+                      ROLES.GENERACION_SOLICITUD_TIC_NUEVO_EQUIPO_CREATE,
+                      ROLES.GENERACION_SOLICITUD_TIC_NUEVO_EQUIPO_VIEW,
                     ]}
                   >
                     <UserCreatePage />
@@ -213,6 +218,83 @@ export const dashboardRoutes = [
           },
         ],
       },
+
+      {
+        path: 'comercial',
+        children: [
+          {
+            path: 'moduloSolicitudes',
+            children: [
+              {
+                path: 'nuevaSolicitudMaquina',
+                element: (
+                  <RoleGuard
+                    requiredRoles={[
+                      ROLES.GENERACION_SOLICITUD_COMERCIAL_NUEVO_EQUIPO_CREATE,
+                      ROLES.GENERACION_SOLICITUD_COMERCIAL_NUEVO_EQUIPO_VIEW,
+                    ]}
+                  >
+                    <UserCreatePage />
+                  </RoleGuard>
+                ), // La página correspondiente al informe de ventas
+              },
+              {
+                path: 'informeVentas2',
+                element: (
+                  <RoleGuard requiredRoles={['informes_venta_read']}>
+                    <ProductListPage />
+                  </RoleGuard>
+                ), // Detalle de un informe específico
+              },
+            ],
+          },
+        ],
+      },
+
+      {
+        path: 'seguridad',
+        children: [
+          {
+            path: 'parametrizaciones',
+            children: [
+              {
+                path: 'ajusteEnvioNotificaciones',
+                element: (
+                  <RoleGuard
+                    requiredRoles={[
+                      ROLES.PARAMETRIZAR_NOTIFICACION_CREATE,
+                      ROLES.PARAMETRIZAR_NOTIFICACION_VIEW,
+                    ]}
+                  >
+                    <Notificaciones />
+                  </RoleGuard>
+                ), // La página correspondiente al informe de ventas
+              },
+
+              {
+                path: 'autorizacionesFirmas',
+                element: (
+                  <RoleGuard
+                    requiredRoles={[ROLES.PARAMETRIZAR_FIRMA_CREATE, ROLES.PARAMETRIZAR_FIRMA_VIEW]}
+                  >
+                    <AutorizacionesFirmas />
+                  </RoleGuard>
+                ), // La página correspondiente al informe de ventas
+              },
+
+              {
+                path: 'informeVentas2',
+                element: (
+                  <RoleGuard requiredRoles={['informes_venta_read']}>
+                    <ProductListPage />
+                  </RoleGuard>
+                ), // Detalle de un informe específico
+              },
+            ],
+          },
+        ],
+      },
+
       {
         path: 'seguridad',
         children: [

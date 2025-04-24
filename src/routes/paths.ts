@@ -93,7 +93,7 @@ export const paths = {
   },
   // DASHBOARD
   dashboard: {
-  /** */  root: ROOTS.DASHBOARD,
+    /** */ root: ROOTS.DASHBOARD,
     mail: `${ROOTS.DASHBOARD}/mail`,
     chat: `${ROOTS.DASHBOARD}/chat`,
     blank: `${ROOTS.DASHBOARD}/blank`,
@@ -143,16 +143,6 @@ export const paths = {
       },
     },
 
-    produccionPrimaria: {
-      root: `${ROOTS.DASHBOARD}/produccionPrimaria`,
-      unidades: `${ROOTS.DASHBOARD}/produccionPrimaria/unidades`,
-      registro: `${ROOTS.DASHBOARD}/produccionPrimaria/registro`,
-      proyeccion: {
-        details: `${ROOTS.DASHBOARD}/produccionPrimaria/${MOCK_ID}`,
-        edit: `${ROOTS.DASHBOARD}/produccionPrimaria/${MOCK_ID}/edit`,
-      },
-    },
-    
     auditoria: {
       root: `${ROOTS.DASHBOARD}/auditoria/moduloInventario`,
       moduloInventario: {
@@ -165,7 +155,29 @@ export const paths = {
       },
     },
 
- 
+    tic: {
+      root: `${ROOTS.DASHBOARD}/tic/moduloSolicitudes`,
+      moduloSolicitudes: {
+        root: `${ROOTS.DASHBOARD}/tic`,
+        crearSolicitudNuevaMaquina: `${ROOTS.DASHBOARD}/tic/moduloSolicitudes/nuevaSolicitudMaquina`,
+      },
+    },
+
+    comercial: {
+      root: `${ROOTS.DASHBOARD}/comercial/moduloSolicitudes`,
+      moduloSolicitudes: {
+        root: `${ROOTS.DASHBOARD}/comercial`,
+        crearSolicitudNuevaMaquina: `${ROOTS.DASHBOARD}/comercial/moduloSolicitudes/nuevaSolicitudMaquina`,
+      },
+    },
+    seguridad: {
+      root: `${ROOTS.DASHBOARD}/seguridad/parametrizaciones`,
+      moduloNotificaciones: {
+        root: `${ROOTS.DASHBOARD}/seguridad`,
+        ajusteEnvioNotificaciones: `${ROOTS.DASHBOARD}/seguridad/parametrizaciones/ajusteEnvioNotificaciones`,
+        ajusteAutorizacionesFirmas: `${ROOTS.DASHBOARD}/seguridad/parametrizaciones/autorizacionesFirmas`,
+      },
+    },
     post: {
       root: `${ROOTS.DASHBOARD}/post`,
       new: `${ROOTS.DASHBOARD}/post/new`,

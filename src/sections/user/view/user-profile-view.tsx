@@ -16,12 +16,7 @@ import { Iconify } from 'src/components/iconify';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 
 import { useMockedUser } from 'src/auth/hooks';
-
-import { ProfileHome } from '../profile-home';
 import { ProfileCover } from '../profile-cover';
-import { ProfileFriends } from '../profile-friends';
-import { ProfileGallery } from '../profile-gallery';
-import { ProfileFollowers } from '../profile-followers';
 
 // ----------------------------------------------------------------------
 
@@ -92,20 +87,6 @@ export function UserProfileView() {
           </Tabs>
         </Box>
       </Card>
-
-      {tabs.value === 'profile' && <ProfileHome info={_userAbout} posts={_userFeeds} />}
-
-      {tabs.value === 'followers' && <ProfileFollowers followers={_userFollowers} />}
-
-      {tabs.value === 'friends' && (
-        <ProfileFriends
-          friends={_userFriends}
-          searchFriends={searchFriends}
-          onSearchFriends={handleSearchFriends}
-        />
-      )}
-
-      {tabs.value === 'gallery' && <ProfileGallery gallery={_userGallery} />}
     </DashboardContent>
   );
 }
